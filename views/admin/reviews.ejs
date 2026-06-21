@@ -1,0 +1,65 @@
+<%- include('../partials/admin-head', { active: 'reviews', pageTitle: 'Bewertungen' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1>Bewertungen</h1>
+    <p>Diese Bewertungen erscheinen im Bereich „Was unsere Kunden sagen".</p>
+  </div>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<div class="panel">
+  <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Neue Bewertung hinzufügen</h3>
+  <form class="form-grid" action="/admin/reviews" method="POST">
+    <div class="form-grid two-col" style="margin:0;">
+      <div class="field">
+        <label for="author_name">Name des Kunden</label>
+        <input id="author_name" type="text" name="author_name" required placeholder="z. B. Julia S.">
+      </div>
+      <div class="field">
+        <label for="rating">Sterne</label>
+        <select id="rating" name="rating">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="quote">Bewertungstext</label>
+      <textarea id="quote" name="quote" required placeholder="Was hat der Kunde gesagt?"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">+ Bewertung hinzufügen</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <% if (items.length === 0) { %>
+    <p class="muted">Noch keine Bewertungen.</p>
+  <% } else { %>
+  <table>
+    <thead><tr><th>Name</th><th>Sterne</th><th>Text</th><th></th></tr></thead>
+    <tbody>
+      <% items.forEach(r => { %>
+      <tr>
+        <td><strong><%= r.author_name %></strong></td>
+        <td><%= '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) %></td>
+        <td style="max-width:380px;"><%= r.quote %></td>
+        <td>
+          <form action="/admin/reviews/<%= r.id %>/delete" method="POST" onsubmit="return confirm('Diese Bewertung wirklich löschen?');">
+            <button class="btn btn-danger btn-sm" type="submit">Löschen</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<%- include('../partials/admin-foot') %>

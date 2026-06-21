@@ -1,0 +1,41 @@
+<%- include('../partials/admin-head', { active: 'products', pageTitle: 'Produkte' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1>Produkte</h1>
+    <p>Diese Karten erscheinen im Bereich „Unser Sortiment" auf Ihrer Webseite.</p>
+  </div>
+  <a class="btn btn-primary" href="/admin/products/new">+ Neues Produkt</a>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<div class="panel">
+  <% if (items.length === 0) { %>
+    <p class="muted">Noch keine Produkte. <a href="/admin/products/new">Jetzt das erste Produkt anlegen.</a></p>
+  <% } else { %>
+  <table>
+    <thead><tr><th></th><th>Name</th><th>Preis</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% items.forEach(p => { %>
+      <tr>
+        <td><img class="thumb" src="<%= p.image_path %>" alt="" referrerpolicy="no-referrer"></td>
+        <td><strong><%= p.name %></strong><% if (p.tag_label) { %><br><span class="muted" style="font-size:0.78rem;"><%= p.tag_label %></span><% } %></td>
+        <td><%= p.price_text %></td>
+        <td><span class="badge <%= p.is_active !== false ? 'badge-on' : 'badge-off' %>"><%= p.is_active !== false ? 'Online' : 'Versteckt' %></span></td>
+        <td>
+          <div class="row-actions">
+            <a class="btn btn-outline btn-sm" href="/admin/products/<%= p.id %>/edit">Bearbeiten</a>
+            <form action="/admin/products/<%= p.id %>/delete" method="POST" onsubmit="return confirm('Dieses Produkt wirklich löschen?');">
+              <button class="btn btn-danger btn-sm" type="submit">Löschen</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<%- include('../partials/admin-foot') %>

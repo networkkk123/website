@@ -1,0 +1,40 @@
+<%- include('../partials/admin-head', { active: 'dashboard', pageTitle: 'Übersicht' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1>Übersicht</h1>
+    <p>Willkommen zurück. Hier sehen Sie auf einen Blick, was auf Ihrer Webseite hinterlegt ist.</p>
+  </div>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="num"><%= counts.products %></div>
+    <div class="label">Produkte</div>
+    <a href="/admin/products">Verwalten →</a>
+  </div>
+  <div class="stat-card">
+    <div class="num"><%= counts.portfolio %></div>
+    <div class="label">Portfolio-Fotos</div>
+    <a href="/admin/portfolio">Verwalten →</a>
+  </div>
+  <div class="stat-card">
+    <div class="num"><%= counts.reviews %></div>
+    <div class="label">Bewertungen</div>
+    <a href="/admin/reviews">Verwalten →</a>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:24px;">
+  <h3 style="margin-top:0; font-family:'Fraunces',serif;">Schnellzugriff</h3>
+  <p class="muted" style="font-size:0.9rem;">Neues Projektfoto hochladen, ein Produkt ergänzen oder Ihre Kontaktdaten aktualisieren.</p>
+  <div class="form-actions">
+    <a class="btn btn-primary" href="/admin/products/new">+ Neues Produkt</a>
+    <a class="btn btn-outline" href="/admin/portfolio">+ Projektfoto hochladen</a>
+    <a class="btn btn-outline" href="/admin/settings">Einstellungen</a>
+  </div>
+</div>
+
+<%- include('../partials/admin-foot') %>

@@ -1,0 +1,23 @@
+{
+  "name": "ds-natursteine",
+  "version": "1.0.0",
+  "description": "DS Natursteine — Webseite mit Admin-Dashboard (Produkte, Portfolio, Bewertungen) und Kontaktformular per E-Mail.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "hash-password": "node scripts/hash-password.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.1"
+  }
+}

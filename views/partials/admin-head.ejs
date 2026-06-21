@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — <%= typeof pageTitle !== 'undefined' ? pageTitle : 'Dashboard' %></title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="brand">D<span>·</span>S <small style="font-size:0.5em; font-weight:500; opacity:0.7;">ADMIN</small></div>
+    <a href="/admin" class="<%= active === 'dashboard' ? 'active' : '' %>">Übersicht</a>
+    <a href="/admin/products" class="<%= active === 'products' ? 'active' : '' %>">Produkte</a>
+    <a href="/admin/portfolio" class="<%= active === 'portfolio' ? 'active' : '' %>">Portfolio</a>
+    <a href="/admin/reviews" class="<%= active === 'reviews' ? 'active' : '' %>">Bewertungen</a>
+    <a href="/admin/settings" class="<%= active === 'settings' ? 'active' : '' %>">Einstellungen</a>
+    <div class="sep"></div>
+    <a href="/" target="_blank" rel="noopener">Webseite ansehen ↗</a>
+    <form action="/admin/logout" method="POST">
+      <button class="logout-btn" type="submit">Abmelden</button>
+    </form>
+  </aside>
+  <main class="admin-main">

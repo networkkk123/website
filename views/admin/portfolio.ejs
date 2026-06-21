@@ -1,0 +1,47 @@
+<%- include('../partials/admin-head', { active: 'portfolio', pageTitle: 'Portfolio' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1>Portfolio</h1>
+    <p>Diese Fotos erscheinen in der Projekt-Galerie auf Ihrer Webseite.</p>
+  </div>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<div class="panel">
+  <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Neues Foto hochladen</h3>
+  <form action="/admin/portfolio" method="POST" enctype="multipart/form-data" style="display:flex; gap:14px; align-items:flex-end; flex-wrap:wrap;">
+    <div class="field" style="flex:1; min-width:200px;">
+      <label for="title">Titel <span class="hint">(intern, z. B. „Terrasse Müller")</span></label>
+      <input id="title" type="text" name="title" placeholder="Projektname">
+    </div>
+    <div class="field" style="flex:1; min-width:220px;">
+      <label for="image">Foto</label>
+      <input id="image" type="file" name="image" accept="image/png,image/jpeg,image/webp,image/gif" required>
+    </div>
+    <button class="btn btn-primary" type="submit" style="height:42px;">+ Hochladen</button>
+  </form>
+</div>
+
+<div class="panel">
+  <% if (items.length === 0) { %>
+    <p class="muted">Noch keine Fotos hochgeladen.</p>
+  <% } else { %>
+  <div class="upload-grid">
+    <% items.forEach(p => { %>
+      <div class="upload-card">
+        <img src="<%= p.image_path %>" alt="<%= p.title %>" referrerpolicy="no-referrer">
+        <div class="meta">
+          <span title="<%= p.title %>"><%= p.title %></span>
+          <form action="/admin/portfolio/<%= p.id %>/delete" method="POST" onsubmit="return confirm('Dieses Foto wirklich löschen?');">
+            <button class="btn btn-danger btn-sm" type="submit">Löschen</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <% } %>
+</div>
+
+<%- include('../partials/admin-foot') %>

@@ -1,0 +1,80 @@
+<%- include('../partials/admin-head', { active: 'settings', pageTitle: 'Einstellungen' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1>Einstellungen</h1>
+    <p>Kontaktdaten, Texte und Bilder, die an mehreren Stellen auf der Webseite erscheinen.</p>
+  </div>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<form action="/admin/settings" method="POST" enctype="multipart/form-data">
+
+  <div class="panel">
+    <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Kontakt &amp; Geschäftsdaten</h3>
+    <div class="form-grid two-col">
+      <div class="field">
+        <label for="business_name">Firmenname</label>
+        <input id="business_name" type="text" name="business_name" value="<%= settings.business_name %>" required>
+      </div>
+      <div class="field">
+        <label for="whatsapp_number">WhatsApp-Nummer <span class="hint">(nur Ziffern, mit Ländercode, z. B. 491737586673)</span></label>
+        <input id="whatsapp_number" type="text" name="whatsapp_number" value="<%= settings.whatsapp_number %>" required>
+      </div>
+      <div class="field">
+        <label for="contact_email">Kontakt-E-Mail <span class="hint">(hier landen Anfragen aus dem Formular)</span></label>
+        <input id="contact_email" type="email" name="contact_email" value="<%= settings.contact_email %>" required>
+      </div>
+      <div class="field">
+        <label for="address">Standort</label>
+        <input id="address" type="text" name="address" value="<%= settings.address %>" required>
+      </div>
+      <div class="field full">
+        <label for="opening_hours">Öffnungszeiten</label>
+        <input id="opening_hours" type="text" name="opening_hours" value="<%= settings.opening_hours %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Social Media <span class="hint">(leer lassen, um das Symbol auszublenden)</span></h3>
+    <div class="form-grid two-col">
+      <div class="field"><label for="facebook_url">Facebook-Link</label><input id="facebook_url" type="text" name="facebook_url" value="<%= settings.facebook_url %>"></div>
+      <div class="field"><label for="instagram_url">Instagram-Link</label><input id="instagram_url" type="text" name="instagram_url" value="<%= settings.instagram_url %>"></div>
+      <div class="field"><label for="tiktok_url">TikTok-Link</label><input id="tiktok_url" type="text" name="tiktok_url" value="<%= settings.tiktok_url %>"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Startseite (Hero)</h3>
+    <div class="form-grid">
+      <div class="field full">
+        <label>Hero-Hintergrundbild</label>
+        <div class="current-image"><img src="<%= settings.hero_image_path %>" alt="" referrerpolicy="no-referrer"><span class="hint">Aktuelles Bild. Neue Datei wählen, um es zu ersetzen.</span></div>
+        <input type="file" name="hero_image" accept="image/png,image/jpeg,image/webp,image/gif">
+      </div>
+      <div class="field"><label for="hero_headline">Überschrift</label><input id="hero_headline" type="text" name="hero_headline" value="<%= settings.hero_headline %>"></div>
+      <div class="field"><label for="hero_subtext">Untertext</label><textarea id="hero_subtext" name="hero_subtext"><%= settings.hero_subtext %></textarea></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0; font-family:'Fraunces',serif; font-size:1.1rem;">Über uns</h3>
+    <div class="form-grid">
+      <div class="field full">
+        <label>Foto im „Über uns"-Bereich</label>
+        <div class="current-image"><img src="<%= settings.about_image_path %>" alt="" referrerpolicy="no-referrer"><span class="hint">Aktuelles Bild. Neue Datei wählen, um es zu ersetzen.</span></div>
+        <input type="file" name="about_image" accept="image/png,image/jpeg,image/webp,image/gif">
+      </div>
+      <div class="field"><label for="about_text_1">Absatz 1</label><textarea id="about_text_1" name="about_text_1"><%= settings.about_text_1 %></textarea></div>
+      <div class="field"><label for="about_text_2">Absatz 2</label><textarea id="about_text_2" name="about_text_2"><%= settings.about_text_2 %></textarea></div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit">Einstellungen speichern</button>
+  </div>
+</form>
+
+<%- include('../partials/admin-foot') %>
