@@ -1,0 +1,256 @@
+<%
+function waLink(text) {
+  return 'https://wa.me/' + settings.whatsapp_number + '?text=' + encodeURIComponent(text);
+}
+function stars(n) {
+  n = Math.max(1, Math.min(5, Number(n) || 5));
+  return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
+}
+const whatsappIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.91-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.96 9.96 0 0 0 12.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.2c-1.66 0-3.21-.46-4.53-1.26l-.32-.19-3.01.79.8-2.93-.21-.3A8.18 8.18 0 0 1 3.8 12c0-4.54 3.7-8.2 8.22-8.2 4.52 0 8.18 3.66 8.18 8.2 0 4.54-3.66 8.2-8.18 8.2z"/></svg>';
+%>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= settings.business_name %> — Naturstein &amp; Granit<%= settings.address ? ' aus ' + settings.address.split(',')[0] : '' %></title>
+<meta name="description" content="<%= settings.business_name %>: Naturstein, Granit, Gartendekoration und Steingrills — handverlesen und auf Wunsch fachmännisch verlegt. Jetzt per WhatsApp oder E-Mail anfragen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,560;9..144,650&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">D<span>·</span>S <span style="font-size:0.55em; font-family:'Work Sans',sans-serif; font-weight:500; color:rgba(255,255,255,0.7); letter-spacing:0.04em;"><%= settings.business_name.split(' ').slice(1).join(' ').toUpperCase() || 'NATURSTEINE' %></span></a>
+    <nav class="primary-nav" id="primaryNav">
+      <a href="#produkte">Produkte</a>
+      <a href="#leistungen">Portfolio</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a class="nav-whatsapp" href="<%= waLink('Hallo ' + settings.business_name + ', ich habe eine Frage.') %>" target="_blank" rel="noopener" style="margin-top:8px;">
+        <%- whatsappIcon %> WhatsApp
+      </a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="<%= settings.hero_image_path %>" alt="<%= settings.business_name %> — fertiges Natursteinprojekt" loading="eager" referrerpolicy="no-referrer">
+  </div>
+  <div class="wrap hero-content">
+    <div class="eyebrow on-dark"><%= settings.address.toUpperCase() %></div>
+    <h1><%= settings.hero_headline %></h1>
+    <p class="hero-sub"><%= settings.hero_subtext %></p>
+    <div class="hero-ctas">
+      <a class="btn btn-whatsapp" href="<%= waLink('Hallo ' + settings.business_name + ', ich interessiere mich für Naturstein für mein Projekt.') %>" target="_blank" rel="noopener">
+        <%- whatsappIcon %> Jetzt per WhatsApp anfragen
+      </a>
+      <a class="btn btn-outline-light" href="#leistungen">Unsere Arbeiten ansehen</a>
+    </div>
+    <div class="hero-meta">
+      <div>STANDORT<strong><%= settings.address %></strong></div>
+      <div>ÖFFNUNGSZEITEN<strong><%= settings.opening_hours %></strong></div>
+      <div>ANFRAGEN<strong>WhatsApp &amp; E-Mail, jederzeit</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <ul>
+      <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg> Schnelle Lieferung</li>
+      <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> Abholung vor Ort</li>
+      <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7l9 5 9-5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg> Einzigartige Auswahl</li>
+    </ul>
+  </div>
+</div>
+
+<section class="products" id="produkte">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">UNSER SORTIMENT</div>
+      <h2>Was wir anbieten</h2>
+      <p>Jedes Stück wird sorgfältig ausgewählt. Für Preise, Verfügbarkeit oder eine individuelle Beratung schreiben Sie uns einfach.</p>
+    </div>
+
+    <% if (products.length === 0) { %>
+      <p class="empty-note">Noch keine Produkte hinterlegt. Im Admin-Bereich unter „Produkte" können Sie welche hinzufügen.</p>
+    <% } else { %>
+    <div class="product-grid">
+      <% products.forEach(p => { %>
+        <article class="product-card reveal">
+          <a class="card-link" href="<%= waLink('Hallo, ich interessiere mich für: ' + p.name) %>" target="_blank" rel="noopener" aria-label="<%= p.name %> per WhatsApp anfragen"></a>
+          <div class="product-photo">
+            <img src="<%= p.image_path %>" alt="<%= p.name %>" loading="lazy" referrerpolicy="no-referrer">
+            <% if (p.tag_label) { %><span class="stone-tag"><%= p.tag_label %></span><% } %>
+          </div>
+          <div class="product-body">
+            <h3><%= p.name %></h3>
+            <% if (p.price_text) { %><div class="price-row"><%= p.price_text %></div><% } %>
+            <% if (p.description) { %><p class="desc"><%= p.description %></p><% } %>
+            <span class="product-cta"><%- whatsappIcon %> Preis &amp; Verfügbarkeit erfragen</span>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="leistungen" id="leistungen">
+  <div class="wrap">
+    <div class="section-head on-dark reveal">
+      <div class="eyebrow on-dark">LEISTUNGEN &amp; PORTFOLIO</div>
+      <h2>Arbeiten, die wir umgesetzt haben</h2>
+      <p>Jeder Stein in unserem Portfolio wurde persönlich ausgesucht und mit Liebe zum Detail verlegt — für Terrassen, Gehwege, Mauern und Grillstationen.</p>
+    </div>
+
+    <% if (portfolio.length === 0) { %>
+      <p class="empty-note">Noch keine Projektfotos hinterlegt. Im Admin-Bereich unter „Portfolio" können Sie welche hochladen.</p>
+    <% } else { %>
+    <div class="gallery-grid reveal">
+      <% portfolio.forEach((item, i) => {
+           const cls = (i % 7 === 0) ? 'g-tall g-wide' : (i % 5 === 3) ? 'g-wide' : (i % 9 === 6) ? 'g-tall' : '';
+      %>
+        <a href="<%= item.image_path %>" target="_blank" rel="noopener" class="<%= cls %>">
+          <img src="<%= item.image_path %>" alt="<%= item.title %>" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="gallery-foot reveal">
+      <p>Granit und Naturstein für Terrassen, Gehwege und Gartenwege — jeder Stein sorgfältig ausgewählt, jede Verlegung mit Fachkenntnis ausgeführt.</p>
+      <a class="btn btn-outline-light" href="<%= waLink('Hallo, ich hätte gerne mehr Referenzen zu Ihren Projekten.') %>" target="_blank" rel="noopener">Mehr Projekte erfragen</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="ueber-uns">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <img src="<%= settings.about_image_path %>" alt="<%= settings.business_name %> bei der Arbeit" loading="lazy" referrerpolicy="no-referrer">
+      <div class="stat-chip"><strong>100%</strong><span>HANDVERLESEN &amp; PERSÖNLICH VERLEGT</span></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">ÜBER UNS</div>
+      <h2 style="margin-top:16px; font-size:clamp(1.9rem, 3.4vw, 2.7rem); line-height:1.12;">Direkt aus dem Steinbruch, mit Leidenschaft verlegt</h2>
+      <p><%= settings.about_text_1 %></p>
+      <p><%= settings.about_text_2 %></p>
+
+      <ul class="value-list">
+        <li><div class="v-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div><div><h4>Direkte Beschaffung</h4><p>Steine direkt von ausgewählten Quellen — für volle Kontrolle über die Qualität.</p></div></li>
+        <li><div class="v-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div><div><h4>Persönliche Beratung</h4><p>Individuelle Lösungen für Ihr Projekt.</p></div></li>
+        <li><div class="v-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 12 2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div><div><h4>Qualität &amp; Zuverlässigkeit</h4><p>Strenge Qualitätskontrolle und verlässliche Liefertermine.</p></div></li>
+        <li><div class="v-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6z"/></svg></div><div><h4>Kundenzufriedenheit</h4><p>Langfristige Beziehungen durch exzellenten Service.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="bewertungen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">BEWERTUNGEN</div>
+      <h2>Was unsere Kunden sagen</h2>
+    </div>
+    <% if (reviews.length === 0) { %>
+      <p class="empty-note">Noch keine Bewertungen hinterlegt. Im Admin-Bereich unter „Bewertungen" können Sie welche hinzufügen.</p>
+    <% } else { %>
+    <div class="review-grid reveal">
+      <% reviews.forEach(r => { %>
+        <div class="review-card">
+          <div class="review-stars"><%= stars(r.rating) %></div>
+          <p class="quote">„<%= r.quote %>"</p>
+          <div class="by">— <%= r.author_name.toUpperCase() %></div>
+        </div>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow on-dark">KONTAKT</div>
+      <h2 style="margin-top:16px; color:#fff; font-size:clamp(1.9rem, 3.4vw, 2.7rem); line-height:1.12;">Schreiben Sie uns</h2>
+      <p style="color:var(--ash-light); margin-top:18px; max-width:48ch;">Per WhatsApp, E-Mail oder über das Formular — wir melden uns so schnell wie möglich bei Ihnen.</p>
+
+      <div class="contact-list">
+        <div class="contact-row">
+          <div class="c-icon"><%- whatsappIcon %></div>
+          <div><h4>WhatsApp</h4><p><a href="<%= waLink('Hallo, ich habe eine Frage.') %>" target="_blank" rel="noopener" style="color:var(--travertine); border-bottom:1px solid var(--line-dark);">+<%= settings.whatsapp_number %></a> — schnellste Antwortzeit</p></div>
+        </div>
+        <div class="contact-row">
+          <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></div>
+          <div><h4>E-Mail</h4><p><a href="mailto:<%= settings.contact_email %>" style="color:var(--travertine); border-bottom:1px solid var(--line-dark);"><%= settings.contact_email %></a></p></div>
+        </div>
+        <div class="contact-row">
+          <div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+          <div><h4>Standort</h4><p><%= settings.address %> — <%= settings.opening_hours %></p></div>
+        </div>
+      </div>
+
+      <% if (settings.facebook_url || settings.instagram_url || settings.tiktok_url) { %>
+      <div class="social-row">
+        <% if (settings.facebook_url) { %><a href="<%= settings.facebook_url %>" aria-label="Facebook" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a><% } %>
+        <% if (settings.instagram_url) { %><a href="<%= settings.instagram_url %>" aria-label="Instagram" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a><% } %>
+        <% if (settings.tiktok_url) { %><a href="<%= settings.tiktok_url %>" aria-label="TikTok" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.5a4.1 4.1 0 0 1-3.1-3.5h-3v13.4a2.6 2.6 0 1 1-2-2.55v-3.07a5.6 5.6 0 1 0 5 5.57V9.7a7.1 7.1 0 0 0 4.1 1.3V8a4.07 4.07 0 0 1-1-.5z"/></svg></a><% } %>
+        <a href="<%= waLink('Hallo, ich habe eine Frage.') %>" aria-label="WhatsApp" target="_blank" rel="noopener"><%- whatsappIcon %></a>
+      </div>
+      <% } %>
+
+      <form class="contact-form reveal" action="/contact" method="POST">
+        <% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+        <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off">
+        <div class="row-2">
+          <div class="field"><label for="name">Name</label><input id="name" type="text" name="name" required value="<%= formValues.name || '' %>"></div>
+          <div class="field"><label for="email">E-Mail</label><input id="email" type="email" name="email" required value="<%= formValues.email || '' %>"></div>
+        </div>
+        <div class="field"><label for="phone">Telefon (optional)</label><input id="phone" type="tel" name="phone" value="<%= formValues.phone || '' %>"></div>
+        <div class="field"><label for="message">Nachricht</label><textarea id="message" name="message" required><%= formValues.message || '' %></textarea></div>
+        <button class="btn btn-whatsapp btn-block" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Nachricht senden</button>
+      </form>
+    </div>
+
+    <div class="reveal">
+      <div class="map-wrap">
+        <span class="map-tag"><%= settings.business_name.toUpperCase() %></span>
+        <iframe src="https://maps.google.com/maps?q=<%= encodeURIComponent(settings.address) %>&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort"></iframe>
+      </div>
+      <div class="contact-form" style="margin-top:24px;">
+        <p style="color:var(--ash-light); margin:0 0 18px; font-size:0.92rem;">Lieber direkt schreiben? Schicken Sie uns ein Foto Ihres Gartens oder Ihrer Terrasse per WhatsApp — wir beraten Sie unverbindlich.</p>
+        <a class="btn btn-whatsapp btn-block" href="<%= waLink('Hallo ' + settings.business_name + ', ich habe ein Projekt und würde mich gerne beraten lassen.') %>" target="_blank" rel="noopener"><%- whatsappIcon %> Projekt per WhatsApp besprechen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#top" class="logo">D<span style="color:var(--copper-light);">·</span>S</a>
+    <ul class="footer-links">
+      <li><a href="#produkte">Produkte</a></li>
+      <li><a href="#leistungen">Portfolio</a></li>
+      <li><a href="#ueber-uns">Über uns</a></li>
+      <li><a href="#bewertungen">Bewertungen</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <p>© <%= new Date().getFullYear() %> <%= settings.business_name %> · <%= settings.address %></p>
+  </div>
+</footer>
+
+<a class="float-whatsapp" href="<%= waLink('Hallo ' + settings.business_name + ', ich habe eine Frage.') %>" aria-label="Per WhatsApp kontaktieren" target="_blank" rel="noopener">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.91-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.96 9.96 0 0 0 12.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.2c-1.66 0-3.21-.46-4.53-1.26l-.32-.19-3.01.79.8-2.93-.21-.3A8.18 8.18 0 0 1 3.8 12c0-4.54 3.7-8.2 8.22-8.2 4.52 0 8.18 3.66 8.18 8.2 0 4.54-3.66 8.2-8.18 8.2z"/></svg>
+</a>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<%- include('../partials/admin-head', { active: 'products', pageTitle: item ? 'Produkt bearbeiten' : 'Neues Produkt' }) %>
+
+<div class="admin-header">
+  <div>
+    <h1><%= item ? 'Produkt bearbeiten' : 'Neues Produkt' %></h1>
+    <p>Diese Angaben erscheinen als Karte im Bereich „Unser Sortiment".</p>
+  </div>
+  <a class="btn btn-outline" href="/admin/products">← Zurück zur Liste</a>
+</div>
+
+<% if (flash) { %><div class="flash flash-<%= flash.type %>"><%= flash.message %></div><% } %>
+
+<div class="panel">
+  <form class="form-grid" action="<%= item ? '/admin/products/' + item.id : '/admin/products' %>" method="POST" enctype="multipart/form-data">
+
+    <div class="field full">
+      <label>Foto</label>
+      <% if (item && item.image_path) { %>
+        <div class="current-image">
+          <img src="<%= item.image_path %>" alt="" referrerpolicy="no-referrer">
+          <span class="hint">Aktuelles Foto. Wählen Sie eine neue Datei, um es zu ersetzen.</span>
+        </div>
+      <% } %>
+      <input type="file" name="image" accept="image/png,image/jpeg,image/webp,image/gif">
+      <span class="hint">JPG, PNG, WEBP oder GIF, max. 8&nbsp;MB.</span>
+    </div>
+
+    <div class="form-grid two-col" style="margin:0;">
+      <div class="field">
+        <label for="name">Produktname</label>
+        <input id="name" type="text" name="name" required value="<%= item ? item.name : '' %>">
+      </div>
+      <div class="field">
+        <label for="tag_label">Kurz-Label <span class="hint">(z. B. „GR · POLYGONAL")</span></label>
+        <input id="tag_label" type="text" name="tag_label" value="<%= item ? item.tag_label : '' %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="price_text">Preis-Anzeige <span class="hint">(z. B. „ab 35,70 € zzgl. Versandkosten" oder „Preis auf Anfrage")</span></label>
+      <input id="price_text" type="text" name="price_text" value="<%= item ? item.price_text : '' %>">
+    </div>
+
+    <div class="field">
+      <label for="description">Beschreibung</label>
+      <textarea id="description" name="description"><%= item ? item.description : '' %></textarea>
+    </div>
+
+    <% if (item) { %>
+    <div class="form-grid two-col" style="margin:0;">
+      <div class="field">
+        <label for="sort_order">Reihenfolge <span class="hint">(kleinere Zahl = weiter vorne)</span></label>
+        <input id="sort_order" type="number" name="sort_order" value="<%= item.sort_order || 0 %>">
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <div class="checkbox-row">
+          <input type="checkbox" id="is_active" name="is_active" <%= item.is_active !== false ? 'checked' : '' %>>
+          <label for="is_active" style="font-weight:400;">Auf der Webseite sichtbar</label>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+      <input type="hidden" name="is_active" value="on">
+    <% } %>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit"><%= item ? 'Änderungen speichern' : 'Produkt anlegen' %></button>
+      <a class="btn btn-outline" href="/admin/products">Abbrechen</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/admin-foot') %>
