@@ -9,10 +9,6 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATA_DIR
-        value: /tmp
-      - key: UPLOAD_DIR
-        value: /tmp/uploads
       - key: SESSION_SECRET
         generateValue: true
       - key: ADMIN_USERNAME
@@ -29,3 +25,5 @@ services:
         sync: false
       - key: SMTP_FROM_NAME
         value: DS Natursteine Webseite
+      - key: PREVIEW_PASSWORD
+        sync: false
