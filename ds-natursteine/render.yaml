@@ -2,7 +2,7 @@ services:
   - type: web
     name: ds-natursteine
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
