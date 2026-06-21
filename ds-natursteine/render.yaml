@@ -3,7 +3,6 @@ services:
     name: ds-natursteine
     runtime: node
     plan: free
-    rootDir: ds-natursteine
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
